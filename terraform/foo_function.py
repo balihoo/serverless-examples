@@ -6,9 +6,11 @@ table = dynamodb.Table('serverless_test')
 
 
 def lambda_handler(event):
-    if event.get('id'):
+    id = event.get('id')
+    
+    if id:
         return table.query(
-            KeyConditionExpression=Key('id').eq(event.get('id'))
+            KeyConditionExpression=Key('id').eq(id)
         )
     else:
         raise Exception("Parameter 'id' required")
